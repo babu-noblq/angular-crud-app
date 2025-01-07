@@ -1,0 +1,30 @@
+
+<h1>{{title}}</h1>
+<div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="name">Name:</label>
+            <input id="name" formControlName="name" />
+            <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="error">
+                Name is required.
+            </div>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input id="email" formControlName="email" />
+            <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error">
+                Email is required.
+            </div>
+        </div>
+        <div>
+            <label for="mobile">Mobile:</label>
+            <input id="mobile" formControlName="mobile" />
+            <div *ngIf="form.get('mobile')?.invalid && form.get('mobile')?.touched" class="error">
+                Mobile is required.
+            </div>
+        </div>
+        <div class="card flex justify-center">
+            <p-button label = "Submit" type="submit"/>
+        </div>
+    </form>
+</div>
