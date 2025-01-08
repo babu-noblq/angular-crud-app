@@ -12,7 +12,7 @@ import { FormComponent } from './common/form/form.component';
 })
 export class AppComponent {
   title = 'Angular Crud App'
-  dashboardTitle = 'Simple API call when dropdown';
+  dashboardTitle = 'Simple API call when dropdown change';
   formTitle = 'Simple form submit';
 
 }
