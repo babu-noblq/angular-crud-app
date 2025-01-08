@@ -1,20 +1,20 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import {ButtonModule} from 'primeng/button';
-import { FormBuilder, FormGroup, ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 import { ChartModule } from 'primeng/chart';
+import jasonData from './data.json'
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
+  selector: 'app-chart',
   imports: [ButtonModule,CommonModule,FormsModule,ReactiveFormsModule,ChartModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  templateUrl: './chart.component.html',
+  styleUrl: './chart.component.scss'
 })
-export class DashboardComponent implements OnInit, OnChanges {
-  @Input() dashboardTitle?: string;
-  @Input() dropdownValue: string = 'John';
+export class ChartComponent {
+  @Input() chartTitle?: string;
+  @Input() dropdownValue: string = 'India';
   form: FormGroup;
   fetchedData: any;
   chartData: any;
@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit, OnChanges {
     console.log("Make API call when ngOnInit",this.dropdownValue);
 
     this.fetchDetails(this.dropdownValue);
+    // this.updateChartData(jasonData);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,8 +58,8 @@ export class DashboardComponent implements OnInit, OnChanges {
   }
 
   fetchDetails(value: string): void {
-    const apiUrl = `https://api.nationalize.io?name=${value}`;
-    this.http.get(apiUrl).subscribe({
+    const apiUrl = `http://universities.hipolabs.com/search?country=${value}`;
+    this.http.get<any[]>(apiUrl).subscribe({
       next: (response) => {
         this.fetchedData = response;
         this.updateChartData(response);
@@ -70,16 +71,19 @@ export class DashboardComponent implements OnInit, OnChanges {
     })
   }
 
-  updateChartData(response: any) {
-    const labels = response.country.map((c: any) => c.country_id);
-    const data = response.country.map((c: any) => c.probability * 100);
+  updateChartData(response: any[]) {
+    console.log(response?.length, "response")
+    const stateCounts = this.groupByKey(response, 'state-province');
+
+    const labels = Object.keys(stateCounts);
+    const data = Object.values(stateCounts);
 
 
     this.chartData = {
       labels: labels,
       datasets: [
         {
-          label: 'Country Probabilities',
+          label: 'State Count',
           data: data,
           backgroundColor: [
             '#FF6384',
@@ -87,6 +91,7 @@ export class DashboardComponent implements OnInit, OnChanges {
             '#FFCE56',
             '#4BC0C0',
             '#9966FF',
+            '#FF9F40',
           ],
           hoverBackgroundColor: [
             '#FF6384',
@@ -94,10 +99,18 @@ export class DashboardComponent implements OnInit, OnChanges {
             '#FFCE56',
             '#4BC0C0',
             '#9966FF',
+            '#FF9F40',
           ],
         },
       ],
     };
-  }
 
+  }
+  groupByKey(array: any[], key: string): { [key: string]: number } {
+    return array.reduce((acc, obj) => {
+      const groupKey = obj[key] || 'Unknown-State';
+      acc[groupKey] = (acc[groupKey] || 0) + 1;
+      return acc;
+    }, {});
+  }
 }

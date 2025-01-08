@@ -1,5 +1,5 @@
 
-<h3>{{dashboardTitle}}</h3>
+<h3>{{chartTitle}}</h3>
 <div class="container">
   <div class="row">
     <!-- Form Column -->
@@ -11,32 +11,30 @@
           formControlName="dropdown"
           (change)="onDropdownChange()"
         >
-          <option value="John">John</option>
-          <option value="Sharma">Sharma</option>
-          <option value="Gabriel">Gabriel</option>
-          <option value="Kamal">Kamal</option>
-          <option value="Mohamad">Mohamad</option>
+        <option value="India">India</option>
+        <option value="United+States">USA</option>
+        <option value="Australia">Australia</option>
+        <option value="United+Kingdom">UK</option>
         </select>
       </form>
 
       <div class="info-tag">
         <p>
-          <strong>Note:</strong> This API will give the predicted nationality of a person based on their name.
+          <strong>Note:</strong> This API will give the count Universities list based on the country.
         </p>
       </div>
 
       <div *ngIf="fetchedData">
         <h3>Fetched Data:</h3>
-        <pre>{{ fetchedData | json }}</pre>
+        <pre>{{ fetchedData?.length }}</pre>
       </div>
     </div>
 
     <!-- Pie Chart Column -->
     <div class="col-6">
       <div class="card">
-        <p-chart type="pie" [data]="chartData" [options]="basicOptions"></p-chart>
+        <p-chart type="bar" [data]="chartData" [options]="basicOptions"></p-chart>
       </div>
     </div>
   </div>
 </div>
-
