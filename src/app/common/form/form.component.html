@@ -1,0 +1,36 @@
+
+<h1>{{formTitle}}</h1>
+<div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="card flex justify-center">
+            <p-floatlabel>
+                <input pInputText id="name" autocomplete="off" formControlName="name"/>
+                <label for="over_label">Name</label>
+            </p-floatlabel>     
+            <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="error">
+                Name is required.
+            </div>
+        </div>
+        <div class="card flex justify-center">
+            <p-floatlabel>
+                <input pInputText id="email" autocomplete="off" formControlName="email"/>
+                <label for="over_label">Email</label>
+            </p-floatlabel>  
+            <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error">
+                Email is required.
+            </div>
+        </div>
+        <div class="card flex justify-center">
+            <p-floatlabel>
+                <input pInputText id="mobile" autocomplete="off" formControlName="mobile"/>
+                <label for="over_label">Mobile</label>
+            </p-floatlabel>  
+            <div *ngIf="form.get('mobile')?.invalid && form.get('mobile')?.touched" class="error">
+                Mobile is required.
+            </div>
+        </div>
+        <div class="card flex justify-center">
+            <p-button label = "Submit" type="submit"/>
+        </div>
+    </form>
+</div>

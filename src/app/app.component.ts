@@ -1,13 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { DashboardComponent } from './common/dashboard/dashboard.component';
+import { FormComponent } from './common/form/form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,DashboardComponent],
+  // standalone: false,
+  imports: [CommonModule, DashboardComponent, FormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-crud-app';
+  title = 'Angular Crud App'
+  dashboardTitle = 'Simple API call when dropdown';
+  formTitle = 'Simple form submit';
+
 }
