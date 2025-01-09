@@ -1,4 +1,53 @@
 <h1 class="flex justify-center">{{title}}</h1>
-<app-dashboard [dashboardTitle]="dashboardTitle"></app-dashboard>
-<app-chart [chartTitle] = "chartTitle"></app-chart>
+<div class="card">
+  <div class="row">
+    <!-- First 6 Columns: First Chart -->
+    <div class="col-6">
+      <form [formGroup]="form" class="form">
+        <label for="countryDropdown" class="block mb-2 font-semibold">Select a Country:</label>
+        <select
+          id="countryDropdown"
+          formControlName="countryDropdown"
+          (change)="onCountryDropdownChange()"
+          class="w-full p-2 border rounded"
+        >
+          <option value="India">India</option>
+          <option value="United+States">USA</option>
+          <option value="Australia">Australia</option>
+          <option value="United+Kingdom">UK</option>
+          <option value="New Zealand">New Zealand</option>
+        </select>
+      </form>
+      <div class="flex items-center justify-center h-full mt-4">
+        <app-chart [countryDropdown]="countryDropdown"></app-chart>
+      </div>
+    </div>
+
+    <!-- Second 6 Columns: Second Chart -->
+    <div class="col-6">
+      <div class="flex items-center justify-center h-full">
+        <form [formGroup]="form">
+          <label for="nameDropdown">Select an option:</label>
+          <select
+            id="nameDropdown"
+            formControlName="nameDropdown"
+            (change)="onNameDropdownChange()"
+          >
+            <option value="John">John</option>
+            <option value="Sharma">Sharma</option>
+            <option value="Gabriel">Gabriel</option>
+            <option value="Kamal">Kamal</option>
+            <option value="Mohamad">Mohamad</option>
+          </select>
+        </form>
+        <div class="flex items-center justify-center h-full mt-4">
+          <app-dashboard [dashboardTitle]="dashboardTitle" [nameDropdown]="nameDropdown"></app-dashboard>
+        </div>      
+      </div>
+    </div>
+  </div>
+</div>
+  
+<!-- <app-dashboard [dashboardTitle]="dashboardTitle"></app-dashboard>
+<app-chart [chartTitle] = "chartTitle"></app-chart> -->
 <app-form [formTitle] = "formTitle"></app-form>

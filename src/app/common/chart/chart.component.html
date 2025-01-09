@@ -1,40 +1,12 @@
 
 <h3>{{chartTitle}}</h3>
-<div class="container">
-  <div class="row">
-    <!-- Form Column -->
-    <div class="col-6">
-      <form [formGroup]="form">
-        <label for="dropdown">Select an option:</label>
-        <select
-          id="dropdown"
-          formControlName="dropdown"
-          (change)="onDropdownChange()"
-        >
-        <option value="India">India</option>
-        <option value="United+States">USA</option>
-        <option value="Australia">Australia</option>
-        <option value="United+Kingdom">UK</option>
-        </select>
-      </form>
 
-      <div class="info-tag">
-        <p>
-          <strong>Note:</strong> This API will give the count Universities list based on the country.
-        </p>
-      </div>
+<div class="info-tag">
+  <p>
+    <strong>Note:</strong> This API will give the count Universities list based on the country.
+  </p>
+</div>
 
-      <div *ngIf="fetchedData">
-        <h3>Fetched Data:</h3>
-        <pre>{{ fetchedData?.length }}</pre>
-      </div>
-    </div>
-
-    <!-- Pie Chart Column -->
-    <div class="col-6">
-      <div class="card">
-        <p-chart type="bar" [data]="chartData" [options]="basicOptions"></p-chart>
-      </div>
-    </div>
-  </div>
+<div class="">
+  <p-chart type="bar" [data]="chartData" [options]="basicOptions" class="h-[30rem]"></p-chart>
 </div>

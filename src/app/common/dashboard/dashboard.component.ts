@@ -12,18 +12,15 @@ import { ChartModule } from 'primeng/chart';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit, OnChanges {
+export class DashboardComponent implements OnChanges {
   @Input() dashboardTitle?: string;
-  @Input() dropdownValue: string = 'John';
-  form: FormGroup;
+  @Input() nameDropdown?: string;
   fetchedData: any;
   chartData: any;
   basicOptions: any;
 
-  constructor(private fb: FormBuilder,private http: HttpClient) {
-    this.form = this.fb.group({
-      dropdown: [this.dropdownValue],
-    });
+  constructor(private http: HttpClient) {
+
     this.basicOptions = {
       plugins: {
         legend: {
@@ -33,27 +30,14 @@ export class DashboardComponent implements OnInit, OnChanges {
     };
   }
 
-  ngOnInit(): void {
-    console.log("Make API call when ngOnInit",this.dropdownValue);
-
-    this.fetchDetails(this.dropdownValue);
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges",changes);
+    console.log("ngOnChanges dashboard",changes);
+    if (changes['nameDropdown']) {
 
-    // if (changes['dropdownValue'] && !changes['dropdownValue'].firstChange) {
+      console.log("Make API call when ngOnChanges changes", this.nameDropdown);
 
-    //   console.log("Make API call when ngOnChanges changes", this.dropdownValue);
-
-    //   this.fetchDetails(changes['dropdownValue'].currentValue);
-    // }
-  }
-
-  onDropdownChange(): void {
-    this.dropdownValue = this.form.get('dropdown')?.value || '';
-    console.log("Make API call when onDropdownChange changes", this.dropdownValue);
-    this.fetchDetails(this.dropdownValue);
+      this.fetchDetails(changes['nameDropdown'].currentValue);
+    }
   }
 
   fetchDetails(value: string): void {

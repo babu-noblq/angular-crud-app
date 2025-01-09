@@ -1,42 +1,16 @@
 
 <h3>{{dashboardTitle}}</h3>
-<div class="container">
-  <div class="row">
-    <!-- Form Column -->
-    <div class="col-6">
-      <form [formGroup]="form">
-        <label for="dropdown">Select an option:</label>
-        <select
-          id="dropdown"
-          formControlName="dropdown"
-          (change)="onDropdownChange()"
-        >
-          <option value="John">John</option>
-          <option value="Sharma">Sharma</option>
-          <option value="Gabriel">Gabriel</option>
-          <option value="Kamal">Kamal</option>
-          <option value="Mohamad">Mohamad</option>
-        </select>
-      </form>
 
-      <div class="info-tag">
-        <p>
-          <strong>Note:</strong> This API will give the predicted nationality of a person based on their name.
-        </p>
-      </div>
 
-      <div *ngIf="fetchedData">
-        <h3>Fetched Data:</h3>
-        <pre>{{ fetchedData | json }}</pre>
-      </div>
-    </div>
-
-    <!-- Pie Chart Column -->
-    <div class="col-6">
-      <div class="card">
-        <p-chart type="pie" [data]="chartData" [options]="basicOptions"></p-chart>
-      </div>
-    </div>
-  </div>
+<div class="info-tag">
+  <p>
+    <strong>Note:</strong> This API will give the predicted nationality of a person based on their name.
+  </p>
 </div>
+
+<!-- Pie Chart Column -->
+<div class="">
+  <p-chart type="pie" [data]="chartData" [options]="basicOptions" style="height: 500px; width: 500px; display: block;"></p-chart>
+</div>
+
 
