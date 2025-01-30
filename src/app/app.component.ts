@@ -15,6 +15,7 @@ import { SplitterModule } from 'primeng/splitter';
 })
 export class AppComponent {
   title = 'Angular simple Dashboard'
+  subTitle = 'Deployed in Netlify Cloud'
   dashboardTitle = 'Simple API call when dropdown change';
   formTitle = 'Simple form submit';
   countryDropdown = 'India'

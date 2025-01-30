@@ -42,7 +42,7 @@ export class ChartComponent implements OnChanges {
   }
 
   fetchDetails(value: string): void {
-    const apiUrl = `http://universities.hipolabs.com/search?country=${value}`;
+    const apiUrl = `https://universities.hipolabs.com/search?country=${value}`;
     this.http.get<any[]>(apiUrl).subscribe({
       next: (response) => {
         this.fetchedData = response;
