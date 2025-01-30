@@ -95,6 +95,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/angular-crud-app",
+            "netlifyToken": "nfp_r5VSpg3Lo3dS7X1Fz5vdYEDS9Zr7FSZF19ed",
+            "siteId": "1a5173b5-5368-4e6f-ad7b-fdc4e3a1e204"
+          }
         }
       }
     }
